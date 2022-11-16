@@ -1,7 +1,8 @@
 const router = require("express").Router();
 const { asyncErrorHandler } = require("./utils");
 const prisma = require("../prisma/prisma");
-//get /api/puppies
+
+// GET /api/puppies
 router.get(
   "/",
   asyncErrorHandler(async (req, res, next) => {
@@ -37,16 +38,19 @@ router.get(
     res.send(singlePup);
   })
 );
+
 // POST /api/puppies
 router.post(
   "/",
   asyncErrorHandler(async (req, res, next) => {
+    // const { name, age, email, ownerId } = req.body;
     const createdPup = await prisma.puppies.create({
       data: req.body,
     });
     res.send(createdPup);
   })
 );
+
 // PATCH /api/puppies/:puppyId
 router.patch(
   "/:puppyId",
@@ -60,6 +64,7 @@ router.patch(
     res.send(updatedPup);
   })
 );
+
 // DELETE /api/puppies
 router.delete(
   "/:puppyId",
